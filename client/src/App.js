@@ -5,6 +5,7 @@ import { auth, firestore } from './firebase-config';
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs, addDoc, doc, deleteDoc } from 'firebase/firestore';
 
+require('dotenv').config();
 
 
 function App() {
@@ -60,8 +61,8 @@ function App() {
           return fetch(`https://v3.football.api-sports.io/teams?league=${leagueId}&season=2022`, {
             method: "GET",
             headers: {
-              "x-rapidapi-host": "v3.football.api-sports.io",
-              "x-rapidapi-key": "df304b83a6de65a52ade2732d0971667"
+              "x-rapidapi-host": process.env.X_RAPIDAPI_HOST,
+              "x-rapidapi-key": process.env.X_RAPIDAPI_KEY
             }
           })
             .then(response => response.json())
