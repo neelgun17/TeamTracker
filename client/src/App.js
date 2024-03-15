@@ -5,7 +5,7 @@ import { auth, firestore } from './firebase-config';
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs, addDoc, doc, deleteDoc } from 'firebase/firestore';
 
-require('dotenv').config();
+// require('dotenv').config();
 
 
 function App() {
@@ -18,6 +18,10 @@ function App() {
   const [teams, setTeams] = useState([]);
   const inputRef = useRef(null);
   const favoriteTeamsRef = useRef([]);
+  const apiHost = process.env.REACT_APP_API_Host;
+  const apiKey = process.env.REACT_APP_API_KEY;
+
+
 
   const signIn = async (e) => {
     e.preventDefault(); // Prevent form submission reload
@@ -61,8 +65,8 @@ function App() {
           return fetch(`https://v3.football.api-sports.io/teams?league=${leagueId}&season=2022`, {
             method: "GET",
             headers: {
-              "x-rapidapi-host": process.env.X_RAPIDAPI_HOST,
-              "x-rapidapi-key": process.env.X_RAPIDAPI_KEY
+              "x-rapidapi-host": apiHost,
+              "x-rapidapi-key": apiKey
             }
           })
             .then(response => response.json())
